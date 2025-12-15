@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import { Clock } from './component/Clock';
-import { render } from 'react-dom';
 import { getRandomName } from './functions/function';
 
 type State = {
@@ -15,8 +14,8 @@ export class App extends React.Component<{}, State> {
     clockName: 'Clock-0',
   };
 
-  handleHide = () => {
-    // event.preventDefault();
+  handleHide = (event: MouseEvent) => {
+    event.preventDefault();
     this.setState({ hasClock: false });
   };
 
@@ -44,6 +43,7 @@ export class App extends React.Component<{}, State> {
   componentWillUnmount(): void {
     document.removeEventListener('click', this.handleShow);
     document.removeEventListener('contextmenu', this.handleHide);
+    clearInterval(this.timerName);
   }
 
   render() {

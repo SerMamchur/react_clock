@@ -1,7 +1,6 @@
 import React from 'react';
 
 type State = {
-  clockName: string;
   today: Date;
 };
 
@@ -12,7 +11,6 @@ type Props = {
 
 export class Clock extends React.PureComponent<Props, State> {
   state: State = {
-    clockName: 'Clock-0',
     today: new Date(),
   };
 
@@ -30,9 +28,11 @@ export class Clock extends React.PureComponent<Props, State> {
     prevProps: Readonly<Props>,
     prevState: Readonly<State>,
   ): void {
-    if (prevState.clockName !== this.state.clockName) {
-      this.props.newName(this.state.clockName);
-    } else if (prevProps.name !== this.props.name) {
+    if (prevProps.name !== this.props.name) {
+      this.props.newName(this.props.name);
+    }
+
+    if (prevProps.name !== this.props.name) {
       // eslint-disable-next-line no-console
       console.warn(`Renamed from ${prevProps.name} to ${this.props.name}`);
     }
